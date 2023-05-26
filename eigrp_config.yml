@@ -1,0 +1,24 @@
+---
+- name: Configure EIGRP on R1 and R2
+  hosts: routers
+  gather_facts: false
+  tasks:
+    - name: Configure EIGRP on R1
+      ios_config:
+        lines:
+          - router eigrp 100
+          - network 192.168.6.0 0.0.0.255
+        provider:
+          host: "{{ inventory_hostname }}"
+          username: <username>
+          password: <password>
+    - name: Configure EIGRP on R2
+      ios_config:
+        lines:
+          - router eigrp 100
+          - network 192.168.2.0 0.0.0.3
+          - network 192.168.4.0 0.0.0.3
+        provider:
+          host: "{{ inventory_hostname }}"
+          username: <username>
+          password: <password>
